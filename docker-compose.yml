@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  web:
+    build: ./frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - node_modules:/app/node_modules
+  api:
+    build: ./backend
+    restart: always
+    ports:
+      - "5050:5050"
+    environment:
+      - PORT=5050
+      - DATABASE_HOST=db
+      - DATABASE_PORT=3306
+      - DATABASE_PASSWORD=123456
+      - DATABASE_NAME=SSPS
+    volumes:
+      - ./backend:/app
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=SSPS
+    ports: 
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:
+  node_modules:
