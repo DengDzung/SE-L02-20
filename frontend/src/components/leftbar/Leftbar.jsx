@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Leftbar.scss";
 
@@ -11,7 +12,7 @@ const Leftbar = ({ isHidden }) => {
   const navigate = useNavigate();
 
   return (
-    <div className={`leftBar ${isHidden ? "hidden" : ""}`}>
+    <div className={`leftBar ${isHidden ? "hidden" : "visible"}`}>
       <div className="leftBarContainer">
         <div className="leftBarMenu">
           <button className="leftBarItem" onClick={() => navigate("/")}>

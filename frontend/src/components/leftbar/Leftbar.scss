@@ -5,6 +5,11 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 
+  &.hidden {
+    transform: translateX(-100%);
+    position: absolute;
+  }
+
   .leftBarContainer {
     padding: 20px;
 
@@ -44,8 +49,4 @@
       }
     }
   }
-}
-
-.leftBar.hidden {
-  transform: translateX(-100%); /* Slide out effect */
 }
