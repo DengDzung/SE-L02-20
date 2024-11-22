@@ -3,32 +3,38 @@ import Login from "../pages/login/Login";
 import Profile from "../pages/profile/Profile";
 import Printer from "../pages/printer/Printer";
 import History from "../pages/history/History";
+import PrinterInfo from "../pages/printerInfo/PrinterInfo";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 const routers = [
   {
     path: "/",
     component: Home,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: "/profile",
     component: Profile,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: "/printer",
     component: Printer,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: "/history",
     component: History,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: "/login",
     component: Login,
-    layout: MainLayout
+    layout: MainLayout,
+  },
+  {
+    path: "/printerInfo",
+    component: PrinterInfo,
+    layout: MainLayout,
   },
 ];
-export default routers
+export default routers;
