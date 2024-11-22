@@ -26,8 +26,12 @@ const Navbar = ({ toggleLeftbar }) => {
       </div>
 
       <div className="rightNavbar">
-        <AccountCircleIcon style={{ fontSize: "50px" }} />
-        <div className="userNavbar" onClick={() => navigate('/profile')}>
+        <AccountCircleIcon
+          className="iconNavbar"
+          style={{ fontSize: "50px" }}
+          onClick={() => navigate("/profile")}
+        />
+        <div className="userNavbar" onClick={() => navigate("/profile")}>
           <img
             src="https://images.pexels.com/photos/1391498/pexels-photo-1391498.jpeg?cs=srgb&dl=pexels-soldiervip-1391498.jpg&fm=jpg&_gl=1*1yr2gyq*_ga*MTY2MTU1MjMzMi4xNzMyMjA1NjQw*_ga_8JE65Q40S6*MTczMjIwOTk2Mi4yLjEuMTczMjIxMDAwNi4wLjAuMA.."
             alt=""
