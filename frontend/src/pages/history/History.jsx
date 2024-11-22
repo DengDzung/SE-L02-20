@@ -1,6 +1,4 @@
-import React from 'react'
-import "./History.scss"
-
+import './History.scss'
 const History = () => {
   return (
     <div>History</div>

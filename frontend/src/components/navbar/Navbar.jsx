@@ -1,4 +1,3 @@
-import React from "react";
 import "./Navbar.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
