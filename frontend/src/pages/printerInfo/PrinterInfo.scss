@@ -58,6 +58,8 @@
       left: 50%;
       transform: translateX(-50%);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+      cursor: pointer;
 
       svg {
         font-size: 50px;
@@ -69,6 +71,7 @@
 
         h1 {
           font-size: 30px;
+          transition: color 0.3s;
         }
 
         .printerStatus {
@@ -80,13 +83,39 @@
             font-size: 20px;
             color: green;
             margin-right: 4px;
+            transition: color 0.3s;
           }
 
           span {
             font-size: 20px;
+            transition: color 0.3s;
           }
         }
       }
+    }
+    .printerReady:hover {
+      background-color: #f0f8ff; /* Light blue background on hover */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhance the shadow */
+      transform: translateX(-50%) translateY(-5px); /* Slight lift effect */
+
+      h1 {
+        color: #0078d7; /* Change the text color on hover */
+      }
+
+      .printerStatus svg {
+        color: #0078d7; /* Change the icon color on hover */
+      }
+
+      .printerStatus span {
+        color: #0078d7; /* Change the status text color on hover */
+      }
+    }
+
+    /* Active (click) effect */
+    .printerReady:active {
+      background-color: #e0e0e0; /* Slightly darker background on click */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+      transform: translateX(-50%) translateY(0); /* Reset lift effect */
     }
   }
 

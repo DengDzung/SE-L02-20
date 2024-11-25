@@ -1,0 +1,131 @@
+.printer-management-page {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f7f7f7;
+
+  .printer-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h1 {
+      font-size: 36px;
+      color: #333;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      .add-printer-btn {
+        padding: 10px 20px;
+        border: none;
+        background-color: #0078d7;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: #005fa3;
+        }
+
+        &:active {
+          transform: scale(0.95); /* Shrink button slightly on click */
+          background-color: #004a85; /* Even darker blue when clicked */
+        }
+      }
+
+      .return-to-dashboard-btn {
+        padding: 10px 20px;
+        background-color: #f44336; /* Red background */
+        color: white;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+
+        &:hover {
+          background-color: #d32f2f; /* Darker red on hover */
+        }
+
+        &:active {
+          transform: scale(0.95); /* Shrink button slightly on click */
+          background-color: #b71c1c; /* Even darker red when clicked */
+        }
+      }
+
+      .configure-file-types-btn {
+        padding: 10px 20px;
+        background-color: #4caf50; /* Green background */
+        color: white;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+
+        &:hover {
+          background-color: #388e3c; /* Darker green on hover */
+        }
+
+        &:active {
+          transform: scale(0.95); /* Shrink button slightly on click */
+          background-color: #2e7d32; /* Even darker green when clicked */
+        }
+      }
+    }
+  }
+
+  .printer-list {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #0078d7;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #e9f1f9;
+      }
+
+      .status-btn {
+        padding: 5px 10px;
+        background-color: #ff6600; /* Orange background */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+
+        &:hover {
+          background-color: #cc5200; /* Darker orange on hover */
+        }
+
+        &:active {
+          transform: scale(0.95); /* Shrink button slightly on click */
+          background-color: #b34700; /* Even darker orange when clicked */
+        }
+      }
+    }
+  }
+}

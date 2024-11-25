@@ -17,7 +17,7 @@ const PrinterInfo = () => {
           className="returnIcon"
           onClick={() => navigate("/")}
         />
-        <div className="printerReady">
+        <div className="printerReady" onClick={() => navigate("/printing")}>
           <PrintIcon />
           <div className="printerName">
             <h1>Canon M10</h1>
