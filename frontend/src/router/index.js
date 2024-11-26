@@ -29,7 +29,7 @@ const routers = [
   {
     path: "/login",
     component: Login,
-    layout: MainLayout,
+    layout: null,
   },
   {
     path: "/printerInfo",
