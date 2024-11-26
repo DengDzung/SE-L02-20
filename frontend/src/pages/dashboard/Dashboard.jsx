@@ -12,19 +12,27 @@ const Dashboard = () => {
 
       <section className="dashboard-summary">
         <div className="summary-item">
-          <h2>Total Printers</h2>
-          <p>5 Printers</p>{" "}
-          {/* Example static value, can be fetched dynamically */}
+          <h2>Admin</h2>
+          <p>Username</p>{" "}
         </div>
         <div className="summary-item">
-          <h2>Total Pages Printed</h2>
-          <p>1,200 Pages</p>{" "}
-          {/* Example static value, can be fetched dynamically */}
+          <h2>Tòa</h2>
+          <p>H6</p>
         </div>
         <div className="summary-item">
-          <h2>Total Students</h2>
-          <p>300 Students</p>{" "}
-          {/* Example static value, can be fetched dynamically */}
+          <h2>Phòng</h2>
+          <p>607</p>
+        </div>
+        <div
+          className="summary-item-button"
+          onClick={() => navigate("/print-require")}
+        >
+          <h2>Yêu Cầu In</h2>
+          <p>300</p>
+        </div>
+        <div className="summary-item">
+          <h2>Số Lượng Đã In</h2>
+          <p>500</p>
         </div>
       </section>
 

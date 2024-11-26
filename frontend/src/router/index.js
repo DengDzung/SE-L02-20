@@ -11,6 +11,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import PrintingLogs from "../pages/printingLogs/PrintingLogs";
 import ManagePrinter from "../pages/managePrinter/ManagePrinter";
 import ManageStudent from "../pages/manageStudent/ManageStudent";
+import PrintRequire from "../pages/printRequire/PrintRequire";
 const routers = [
   {
     path: "/",
@@ -70,6 +71,11 @@ const routers = [
   {
     path: "/configuration",
     component: ManageStudent,
+    layout: MainLayout,
+  },
+  {
+    path: "/print-require",
+    component: PrintRequire,
     layout: MainLayout,
   },
 ];
