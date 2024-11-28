@@ -1,4 +1,6 @@
 const File = require('../models/file.model')
+const fs = require('fs')
+const path = require('path');
 exports.getAllFile = (req,res) =>{
   File.findAll()
   .then( files =>{
@@ -15,15 +17,15 @@ exports.getAllFile = (req,res) =>{
   })
 }
 exports.getFilesById = (req,res) =>{
-  const fileId = req.params.id
+  const studentId = req.params.id
   File.findAll({
     where:{
-      fileId:fileId
+      studentId:studentId
     }
   })
   .then( files =>{
     res.status(200).json({
-      message:`Get files by ${fileId}`,
+      message:`Get files by ${studentId}`,
       files:files
     })
   })
@@ -36,7 +38,7 @@ exports.getFilesById = (req,res) =>{
 }
 exports.uploadFile = (req,res) =>{
   File.create({
-    fileId:req.body.id,
+    studentId:req.body.id,
     fileName:req.file.originalname,
     fileUrl:`uploads/${req.file.filename}`
   })
@@ -70,6 +72,15 @@ exports.deleteFile = (req,res)=>{
     })
   })
   .then(file =>{
+    const array = file.fileUrl.split('/')
+    const fileName = array[array.length-1];
+    const filePath = path.join(__dirname, '..', 'uploads', fileName);
+    try {
+      fs.rmSync(filePath)
+      console.log('File deleted successfully');
+    } catch (err) {
+      console.error(`Error deleting file: ${err}`);
+    }
     res.status(200).json({
       message:"Delete file",
       file:file

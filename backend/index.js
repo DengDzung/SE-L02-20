@@ -17,7 +17,7 @@ app.get("*", (req, res) => {
 //   console.log(`server is running at ${PORT}`);
 // });
 
-db.sync({ alter:true }).then((req) => {
+db.sync({ force:true }).then((req) => {
   app.listen(PORT, () => {
     console.log(`server is running at ${PORT}`);
   });

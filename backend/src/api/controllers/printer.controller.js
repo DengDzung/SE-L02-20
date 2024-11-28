@@ -1,3 +1,4 @@
+const Admin = require('../models/admin.model')
 const Printer = require('../models/printer.model')
 const printerValidation = require('../validation/printerValidation')
 exports.getAllPrinter = (req,res) => {
@@ -36,9 +37,35 @@ exports.getPrinterById = (req,res) => {
     })
   })
 }
+exports.getPrinterByAdminId = (req,res) =>{
+  const adminId = req.params.id
+   Printer.findOne({
+    where:{
+      adminId:adminId
+    }
+   })
+  .then(printer =>{
+      if(!printer){
+        res.status(404).json({
+          message:"Printer not found !",
+        })
+      }
+      res.status(200).json({
+        message:`Get printer by Admin Id: ${adminId}`,
+        printer:printer
+      })
+  })
+  .catch( err =>{
+    res.status(400).json({
+      message:"Bad request",
+      detail: err
+    })
+  })
+}
 exports.createPrinter = (req,res) =>{
   if (printerValidation(req)){
     Printer.create({
+      adminId:req.body.id,
       model:req.body.model,
       brand:req.body.brand,
       description:req.body.description,
