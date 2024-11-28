@@ -1,15 +1,15 @@
 const Student = require("../models/student.model")
 const crypto = require("crypto")
 const {base64url} = require("../helpers")
-exports.studentLogin = (req,res) =>{
-  Student.findOne({
+exports.studentLogin = async (req,res) =>{
+  console.log(req.body)
+  await Student.findOne({
     where:{
       email:req.body.email,
       passwd:req.body.passwd
     }
   })
   .then(student =>{
-    console.log(process.env.SECRETE_KEY)
     if(!student){
        res.status(401).json({
         message:"Unathorized"
