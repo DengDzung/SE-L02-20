@@ -1,11 +1,18 @@
 const Sequelize = require("sequelize")
 const db  = require("../../config/database");
-
+const Admin = require("../models/admin.model")
 const Printer = db.define('Printer',{
   printerId:{
     type:Sequelize.INTEGER,
     autoIncrement:true,
     primaryKey:true,
+  },
+  adminId:{
+    type:Sequelize.INTEGER,
+    references:{
+      model:Admin,
+      key:'adminId'
+    },
   },
   model:{
     type:Sequelize.STRING
@@ -30,5 +37,6 @@ const Printer = db.define('Printer',{
     type:Sequelize.INTEGER
   }
 })
-
+Admin.hasMany(Printer, { foreignKey: 'adminId' });
+Printer.belongsTo(Admin, { foreignKey: 'adminId' });
 module.exports = Printer

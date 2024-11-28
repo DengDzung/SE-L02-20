@@ -4,7 +4,7 @@ const Auth = require("../middlewares");
 const StudentControllers = require("../controllers/student.controller");
 routes.get("/", Auth, StudentControllers.getAllStudent);
 routes.get("/:id", Auth, StudentControllers.getStudentById);
-routes.post("/", Auth, StudentControllers.createStudent);
+routes.post("/", StudentControllers.createStudent);
 routes.put("/:id", Auth, StudentControllers.updateStudent);
 routes.delete("/:id", Auth, StudentControllers.deleteStudent);
 module.exports = routes;

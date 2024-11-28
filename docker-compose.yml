@@ -21,6 +21,7 @@ services:
       - DATABASE_PORT=3306
       - DATABASE_PASSWORD=123456
       - DATABASE_NAME=SSPS
+      - SECRETE_KEY=nguyendangkhoa04072004
     volumes:
       - ./backend:/app
   db:
