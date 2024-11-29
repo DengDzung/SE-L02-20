@@ -12,6 +12,7 @@ import PrintingLogs from "../pages/printingLogs/PrintingLogs";
 import ManagePrinter from "../pages/managePrinter/ManagePrinter";
 import ManageStudent from "../pages/manageStudent/ManageStudent";
 import PrintRequire from "../pages/printRequire/PrintRequire";
+import Truoc from "../pages/truoc/Truoc";
 const routers = [
   {
     path: "/",
@@ -77,6 +78,11 @@ const routers = [
     path: "/print-require",
     component: PrintRequire,
     layout: MainLayout,
+  },
+  {
+    path: "/landpage",
+    component: Truoc,
+    layout: null,
   },
 ];
 export default routers;
