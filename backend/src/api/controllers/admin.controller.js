@@ -10,11 +10,12 @@ exports.getAdminById = (req,res) =>{
         res.status(404).json({
           message:"admin not found !",
         })
+      }else{
+        res.status(200).json({
+          message:`Get admin by Id: ${adminId}`,
+          admin:admin
+        })
       }
-      res.status(200).json({
-        message:`Get admin by Id: ${adminId}`,
-        admin:admin
-      })
   })
   .catch( err =>{
     res.status(400).json({

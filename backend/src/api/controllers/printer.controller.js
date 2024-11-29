@@ -24,11 +24,12 @@ exports.getPrinterById = (req,res) => {
         res.status(404).json({
           message:"Printer not found !",
         })
+      }else{
+        res.status(200).json({
+          message:`Get printer by Id: ${printerId}`,
+          printer:printer
+        })
       }
-      res.status(200).json({
-        message:`Get printer by Id: ${printerId}`,
-        printer:printer
-      })
   })
   .catch( err =>{
     res.status(400).json({

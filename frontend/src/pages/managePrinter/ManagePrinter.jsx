@@ -4,51 +4,49 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ManagePrinter = () => {
-  const navigate = useNavigate();
-  const [printers, setPrinters] = useState([
-    {
-      id: 1,
-      printer: "Canon M10",
-      printerID: "H660701",
-      location: "H6-607",
-      fileTypes: " PDF, PNG, JPEG",
-      printedPages: "A0:1 A1:2 A3:4 A4:5",
-      maintenance: "2024-11-21",
-      status: "Active",
-    },
-    {
-      id: 2,
-      printer: "HP LaserJet",
-      printerID: "H660701",
-      location: "H6-607",
-      fileTypes: " PDF, PNG, JPEG",
-      printedPages: "A0:1 A1:2 A3:4 A4:5",
-      maintenance: "2024-11-21",
-      status: "Active",
-    },
-    {
-      id: 3,
-      printer: "Canon M10",
-      printerID: "H660701",
-      location: "H6-607",
-      fileTypes: " PDF, PNG, JPEG",
-      printedPages: "A0:1 A1:2 A3:4 A4:5",
-      maintenance: "2024-11-20",
-      status: "Inactive",
-    },
-  ]);
+  const [printers, setPrinters] = useState([])
+  const [status,setStatus] = useState(false)
+  const navigate = useNavigate()
+  useEffect(()=>{
+    fetch("http://localhost:5050/api/printers/all",{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+    })
+    .then(res=>res.json())
+    .then(json =>{
+      const printerList = json.printers
+      setPrinters(printerList)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  },[status])
 
   const handleStatusChange = (id) => {
-    setPrinters((prevPrinters) =>
-      prevPrinters.map((printer) =>
-        printer.id === id
-          ? {
-              ...printer,
-              status: printer.status === "Active" ? "Inactive" : "Active",
-            }
-          : printer
-      )
-    );
+    const printer = printers.find((p => p.printerId == id))
+    const enable = !printer.enable
+    fetch(`http://localhost:5050/api/printers/${id}}`,{
+      method:'PATCH',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body:JSON.stringify({enable : enable})
+    })
+    .then(res =>{
+      if(res.status === 200){
+        return res.json()
+      }
+    })
+    .then(() =>{
+      setStatus(!status)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
   };
 
   const handleAddPrinter = () => {
@@ -105,34 +103,30 @@ const ManagePrinter = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Printer</th>
-              <th>Printer ID</th>
+              <th>Printer Brand</th>
+              <th>Printer Model</th>
               <th>Location</th>
               <th>File Types</th>
-              <th>Printed Pages</th>
-              <th>Maintenance</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {printers.length > 0 ? (
-              printers.map((printer) => (
-                <tr key={printer.id}>
-                  <td>{printer.id}</td>
-                  <td>{printer.printer}</td>
-                  <td>{printer.printerID}</td>
-                  <td>{printer.location}</td>
-                  <td>{printer.fileTypes}</td>
-                  <td>{printer.printedPages}</td>
-                  <td>{printer.maintenance}</td>
-                  <td>{printer.status}</td>
+              printers.map((printer,index) => (
+                <tr key={index}>
+                  <td>{printer.printerId}</td>
+                  <td>{printer.brand}</td>
+                  <td>{printer.model}</td>
+                  <td>{printer.buildingName}-{printer.roomNumber}</td>
+                  <td>PDF</td>
+                  <td>{printer.enable ? "Enable" : "Disable"}</td>
                   <td>
                     <button
-                      onClick={() => handleStatusChange(printer.id)}
+                      onClick={() => handleStatusChange(printer.printerId)}
                       className="status-btn"
                     >
-                      {printer.status === "Active" ? "Disable" : "Enable"}
+                      {printer.enable  ? "Disable" : "Enable"}
                     </button>
                   </td>
                 </tr>

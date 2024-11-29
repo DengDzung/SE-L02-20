@@ -4,5 +4,8 @@ const base64url = str =>{
   .replace(/\//g, '_') // Replace all '/' with '_'
   .replace(/=+$/, ''); // Remove trailing '='
 }
-
-module.exports = {base64url}
+function processString(input) {
+  // Use a regular expression to retain only numbers, commas, and hyphens
+  return input.replace(/[^0-9,-]/g, '');
+}
+module.exports = {base64url,processString}

@@ -5,6 +5,7 @@ import Printer from "../pages/printer/Printer";
 import History from "../pages/history/History";
 import PrinterInfo from "../pages/printerInfo/PrinterInfo";
 import MainLayout from "../layouts/MainLayout/MainLayout";
+import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 import LoginAdmin from "../pages/loginAdmin/Login";
 import Printing from "../pages/printing/Printing";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -14,7 +15,19 @@ import ManageStudent from "../pages/manageStudent/ManageStudent";
 import PrintRequire from "../pages/printRequire/PrintRequire";
 const routers = [
   {
-    path: "/",
+    path: "/loginSV",
+    component: LoginSV,
+    layout: null,
+  },
+  {
+    path: "/loginAdmin",
+    component: LoginAdmin,
+    layout: null,
+  },
+];
+const studentRouters = [
+  {
+    path: "/home",
     component: Home,
     layout: MainLayout,
   },
@@ -34,49 +47,42 @@ const routers = [
     layout: MainLayout,
   },
   {
-    path: "/loginSV",
-    component: LoginSV,
-    layout: null,
-  },
-  {
-    path: "/loginAdmin",
-    component: LoginAdmin,
-    layout: null,
-  },
-  {
-    path: "/printerInfo",
+    path: "/printerInfo/:id",
     component: PrinterInfo,
     layout: MainLayout,
   },
   {
-    path: "/printing",
+    path: "/printing/:id",
     component: Printing,
     layout: MainLayout,
   },
+]
+
+const adminRouters = [
   {
     path: "/dashboard",
     component: Dashboard,
-    layout: MainLayout,
-  },
-  {
-    path: "/printing-logs",
-    component: PrintingLogs,
-    layout: MainLayout,
+    layout: AdminLayout,
   },
   {
     path: "/printer-management",
     component: ManagePrinter,
-    layout: MainLayout,
+    layout: AdminLayout,
   },
   {
     path: "/configuration",
     component: ManageStudent,
-    layout: MainLayout,
+    layout: AdminLayout,
   },
   {
     path: "/print-require",
     component: PrintRequire,
-    layout: MainLayout,
+    layout: AdminLayout,
   },
-];
-export default routers;
+  {
+    path: "/printing-logs",
+    component: PrintingLogs,
+    layout: AdminLayout,
+  },
+]
+export {routers , studentRouters, adminRouters };

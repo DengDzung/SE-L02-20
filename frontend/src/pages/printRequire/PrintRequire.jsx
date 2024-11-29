@@ -1,44 +1,39 @@
 import React from "react";
 import "./PrintRequire.scss";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate} from "react-router-dom";
+import {useState, useEffect } from "react"
 const PrintRequire = () => {
   const navigate = useNavigate();
-  const printRequests = [
-    {
-      id: 1,
-      student: "John Doe",
-      mssv: "2211620",
-      printer: "Canon M10",
-      fileType: "PDF",
-      pageSize: "A4",
-      numPages: 10,
-      doubleSided: "Yes",
-      numCopies: 2,
-    },
-    {
-      id: 2,
-      student: "Jane Smith",
-      mssv: "2211621",
-      printer: "HP LaserJet",
-      fileType: "PNG",
-      pageSize: "A3",
-      numPages: 5,
-      doubleSided: "No",
-      numCopies: 1,
-    },
-    {
-      id: 3,
-      student: "Samuel Lee",
-      mssv: "2211622",
-      printer: "Canon M10",
-      fileType: "JPEG",
-      pageSize: "A4",
-      numPages: 8,
-      doubleSided: "Yes",
-      numCopies: 3,
-    },
-  ];
+  const [logs,setLogs] = useState([])
+  useEffect(()=>{
+    fetch("http://localhost:5050/api/logs/admin",{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+    })
+    .then(res=>res.json())
+    .then(json=>{
+      console.log(json)
+      const logList = json.logs
+      setLogs(logList)
+    })
+    .catch(err=>console.log(err))
+  },[])
+  const handleSubmitPrint = (id) =>{
+    console.log(id)
+    fetch(`http://localhost:5050/api/logs/${id}`,{
+      method:'PATCH',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body:JSON.stringify({status: "Printed"})
+    })
+    .then(() => window.location.reload())
+    .catch(err=>console.log(err))
+  }
   return (
     <div className="print-require-page">
       <div className="header">
@@ -55,32 +50,32 @@ const PrintRequire = () => {
         <table className="print-requests-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Student</th>
-              <th>MSSV</th>
+              <th>Mã Số SV</th>
+              <th>Họ và Tên SV</th>
               <th>Máy In</th>
-              <th>File Type</th>
-              <th>Page Size</th>
-              <th>Number of Pages</th>
-              <th>Double-Sided</th>
-              <th>Number of Copies</th>
+              <th>Tên File</th>
+              <th>Kích cỡ</th>
+              <th>Trang in</th>
+              <th>Số bản copy</th>
+              <th>Số Lượng</th>
+              <th>Trạng thái</th>
               <th>Xác Nhận</th>
             </tr>
           </thead>
           <tbody>
-            {printRequests.map((request) => (
-              <tr key={request.id}>
-                <td>{request.id}</td>
-                <td>{request.student}</td>
-                <td>{request.mssv}</td>
-                <td>{request.printer}</td>
-                <td>{request.fileType}</td>
-                <td>{request.pageSize}</td>
-                <td>{request.numPages}</td>
-                <td>{request.doubleSided}</td>
-                <td>{request.numCopies}</td>
+            {logs.map((log, index) => (
+              <tr key={index}>
+                <td>{log.studentId}</td>
+                <td>{log.Student.name}</td>
+                <td>{log.Printer.brand} {log.Printer.model}</td>
+                <td>{log.fileName}</td>
+                <td>A{log.pageSize}</td>
+                <td>{log.pagePrinted}</td>
+                <td>{log.numCopy}</td>
+                <td>{log.totalPage}</td>
+                <td>{log.status}</td>
                 <td>
-                  <button className="confirm-btn">Confirm</button>
+                  <button className="confirm-btn" onClick={() => handleSubmitPrint(log.logId)}>Confirm</button>
                 </td>
               </tr>
             ))}

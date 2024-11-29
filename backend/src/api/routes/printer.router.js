@@ -2,12 +2,12 @@ const express = require("express");
 const routes = express.Router();
 const Auth = require("../middlewares");
 const PrinterControllers = require("../controllers/printer.controller");
-routes.get("/", Auth, PrinterControllers.getAllPrinter);
-routes.get("/:id", Auth, PrinterControllers.getPrinterById);
-routes.get("/admin/:id",Auth,PrinterControllers.getPrinterByAdminId)
-routes.post("/", Auth, PrinterControllers.createPrinter);
-routes.put("/:id", Auth, PrinterControllers.updatePrinter);
-routes.patch("/:id",Auth, PrinterControllers.enablePrinter);
-routes.delete("/:id", Auth, PrinterControllers.deletePrinter);
+routes.get("/all",  PrinterControllers.getAllPrinter);
+routes.get("/:id",  PrinterControllers.getPrinterById);
+routes.get("/admin/:id",PrinterControllers.getPrinterByAdminId)
+routes.post("/",  PrinterControllers.createPrinter);
+routes.put("/:id",  PrinterControllers.updatePrinter);
+routes.patch("/:id", PrinterControllers.enablePrinter);
+routes.delete("/:id",  PrinterControllers.deletePrinter);
 
 module.exports = routes;

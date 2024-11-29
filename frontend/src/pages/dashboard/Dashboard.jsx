@@ -1,9 +1,41 @@
 import React from "react";
 import "./Dashboard.scss";
 import { useNavigate } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [admin,setAdmin] = useState({
+    adminId: "",
+    adminName: "",
+    email: "",
+    campusName: "",
+    building: "",
+    roomNumber: 0,
+  })
+  useEffect(() =>{
+    fetch("http://localhost:5050/api/admins/",{
+      method:'GET',
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+    })
+    .then(res => res.json())
+    .then(json =>{
+      const adminInfo = json.admin
+      setAdmin({
+        adminId: adminInfo.adminId,
+        adminName: adminInfo.adminName,
+        email: adminInfo.email,
+        campusName: adminInfo.campusName,
+        building: adminInfo.building,
+        roomNumber: adminInfo.roomNumber,
+      })
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },[])
   return (
     <div className="dashboard">
       <header className="dashboard-header">
@@ -13,15 +45,15 @@ const Dashboard = () => {
       <section className="dashboard-summary">
         <div className="summary-item">
           <h2>Admin</h2>
-          <p>Username</p>{" "}
+          <p>{admin.adminName}</p>{" "}
         </div>
         <div className="summary-item">
           <h2>Tòa</h2>
-          <p>H6</p>
+          <p>{admin.building}</p>
         </div>
         <div className="summary-item">
           <h2>Phòng</h2>
-          <p>607</p>
+          <p>{admin.roomNumber}</p>
         </div>
         <div
           className="summary-item-button"

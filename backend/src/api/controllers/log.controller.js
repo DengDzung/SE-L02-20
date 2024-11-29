@@ -1,9 +1,23 @@
 const Log = require("../models/log.model")
 const Student = require("../models/student.model")
-const File = require("../models/file.model")
 const Printer = require("../models/printer.model")
-exports.getAllLog = (req,res)=>{
-  Log.findAll()
+const {processString} = require("../helpers")
+exports.getAllLogStudent = (req,res)=>{
+  Log.findAll({
+    where:{
+      studentId:req.params.id
+    },
+    include:[
+      {
+        model:Student,
+        attributes: ['name'],
+      },
+      {
+        model:Printer,
+        attributes: ['brand','model'],
+      }
+    ]
+  })
   .then( logs =>{
     res.status(200).json({
       message:"Get all logs",
@@ -18,11 +32,10 @@ exports.getAllLog = (req,res)=>{
   })
 }
 
-exports.getLogsById = (req,res) => {
-  const studentId = req.params.id
+exports.getAllLogAdmin = (req,res) => {
   Log.findAll({
     where:{
-      studentId:studentId
+      status:"Wait"
     },
     include:[
       {
@@ -30,40 +43,40 @@ exports.getLogsById = (req,res) => {
         attributes: ['name'],
       },
       {
-        model:File,
-        attributes: ['fileName','fileUrl'],
-      },
-      {
         model:Printer,
-        attributes: ['brand','model'],
+        attributes: ['brand','model','adminId'],
+        where:{
+          adminId:req.params.id
+        }
       }
     ]
   })
   .then( logs =>{
-    if(!logs){
-      res.status(404).json({
-        message:"Student not found !"
-      })
-    }
     res.status(200).json({
-      message:`Get logs by ${studentId}`,
-      logs:logs
+      message:"Get all logs",
+      logs: logs
     })
   })
-  .catch(err => {
+  .catch( err =>{
     res.status(400).json({
       message:"Bad request",
-      detail:err
+      detail: err
     })
   })
 }
 
 exports.createLog = (req,res) =>{
-  const totalPage = (parseInt(req.body.pageSize) == 4 ? 1 : (parseInt(req.body.pageSize) - 4) * -2) * parseInt(req.body.numCopy)
+  console.log(req.file)
+  console.log(req.body)
+  const pagePrinted = processString(req.body.pagePrinted) 
+  const numPage = pagePrinted.split(',').length
+  const totalPage = ((parseInt(req.body.pageSize) == 4 ? 1 : (parseInt(req.body.pageSize) - 4) * -2) * numPage) * parseInt(req.body.numCopy)
   Log.create({
     printerId:req.body.printerId,
-    fileId:req.body.fileId,
-    studentId:req.body.id,
+    fileName:req.file.originalname,
+    fileUrl:`uploads/${req.file.filename}`,
+    pagePrinted:pagePrinted === "" ? "All" :  pagePrinted,
+    studentId:req.params.id,
     doubleSide:req.body.doubleSide,
     pageSize:req.body.pageSize,
     numCopy:req.body.numCopy,

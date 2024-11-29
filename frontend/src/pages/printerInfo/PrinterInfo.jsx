@@ -2,25 +2,62 @@ import "./PrinterInfo.scss";
 import PrintIcon from "@mui/icons-material/Print";
 import CircleIcon from "@mui/icons-material/Circle";
 import SettingsIcon from "@mui/icons-material/Settings";
-import InfoIcon from "@mui/icons-material/Info";
+// import InfoIcon from "@mui/icons-material/Info";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const PrinterInfo = () => {
   const navigate = useNavigate();
-
+  const [printer,setPrinter] = useState({
+    printerId: 0,
+    model: "",
+    brand: "",
+    description: "",
+    enable: true,
+    campusName: "",
+    buildingName: "",
+    roomNumber: 0,
+  })
+  const {id} = useParams()
+  useEffect(()=>{
+    fetch(`http://localhost:5050/api/printers/${id}`,{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+    })
+    .then(res=>res.json())
+    .then(json=>{
+      const printerInfo = json.printer
+      setPrinter({
+        printerId: printerInfo.printerId,
+        model: printerInfo.model,
+        brand: printerInfo.brand,
+        description: printerInfo.description,
+        enable: printerInfo.enable,
+        campusName: printerInfo.campusName,
+        buildingName: printerInfo.buildingName,
+        roomNumber: printerInfo.roomNumber,
+      })
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  })
   return (
     <div className="printerInfo">
       <div className="printerInfoHeader">
         <KeyboardReturnIcon
           className="returnIcon"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/printer")}
         />
-        <div className="printerReady" onClick={() => navigate("/printing")}>
+        <div className="printerReady" onClick={() => navigate(`/printing/${id}`)}>
           <PrintIcon />
           <div className="printerName">
-            <h1>Canon M10</h1>
+            <h2>{printer.brand} {printer.model}</h2>
             <div className="printerStatus">
               <CircleIcon />
               <span>Sẵn sàng</span>
@@ -37,21 +74,21 @@ const PrinterInfo = () => {
           </div>
           <hr />
           <div className="printerInfoCardBody">
-            <div>Mã số máy in: H660701</div>
-            <div>Tên máy in: Canon M10</div>
-            <div>Mẫu mã máy in: VIP2004</div>
+            <div>Printer ID : {printer.printerId}</div>
+            <div>Brand : {printer.brand}</div>
+            <div>Model : {printer.model}</div>
             <div style={{ display: "flex", alignItems: "center" }}>
-              Khả năng sử dụng :
+              Status :
               <CircleIcon
                 style={{ fontSize: 20, color: "green", margin: "0 4px" }}
               />
-              bình thường
+              {printer.enable ? "Enable" : "Disable"}
             </div>
-            <div>Địa chỉ: H6 - 607</div>
-            <div>Máy in dành cho sinh viên sử dụng...</div>
+            <div>Location: {printer.buildingName} - {printer.roomNumber}</div>
+            <div>Description: {printer.description}</div>
           </div>
         </div>
-        <div className="printerInfoCard">
+        {/* <div className="printerInfoCard">
           <div className="printerInfoCardHeader">
             <InfoIcon />
             <h1>Thông tin sử dụng</h1>
@@ -66,7 +103,7 @@ const PrinterInfo = () => {
             <div>Trang A1: 30</div>
             <div>Trang A0: 30</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

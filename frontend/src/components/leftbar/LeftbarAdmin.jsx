@@ -8,7 +8,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const Leftbar = ({ isHidden }) => {
+const LeftbarAdmin = ({ isHidden }) => {
   const navigate = useNavigate();
   const handleLogout = () =>{
     localStorage.removeItem('isAuth')
@@ -19,17 +19,17 @@ const Leftbar = ({ isHidden }) => {
     <div className={`leftBar ${isHidden ? "hidden" : "visible"}`}>
       <div className="leftBarContainer">
         <div className="leftBarMenu">
-          <button className="leftBarItem" onClick={() => navigate("/home")}>
+          <button className="leftBarItem" onClick={() => navigate("/dashboard")}>
             <HomeIcon />
             <span>Bảng điều khiển</span>
           </button>
-          <button className="leftBarItem" onClick={() => navigate("/printer")}>
+          <button className="leftBarItem" onClick={() => navigate("/printer-management")}>
             <PrintIcon />
             <span>Máy in</span>
           </button>
-          <button className="leftBarItem" onClick={() => navigate("/history")}>
+          <button className="leftBarItem" onClick={() => navigate("/print-require")}>
             <ManageSearchIcon />
-            <span>Lịch sử in</span>
+            <span>Yêu cầu in</span>
           </button>
           <button className="leftBarItem" onClick={() => navigate("/profile")}>
             <AccountCircleIcon />
@@ -45,4 +45,4 @@ const Leftbar = ({ isHidden }) => {
   );
 };
 
-export default Leftbar;
+export default LeftbarAdmin;

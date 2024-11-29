@@ -1,38 +1,23 @@
-import React from "react";
+import React, { useState , useEffect } from "react";
 import "./History.scss";
 
 const History = () => {
-  const printRecords = [
-    {
-      studentId: "2211618",
-      fullName: "Nguyễn Đăng Khoa",
-      printerId: "H660701",
-      printTime: "01/01/2025 -13:05",
-      quantity: "A0:1 A1:2 A3:4 A4:5",
-    },
-    {
-      studentId: "2211618",
-      fullName: "Nguyễn Đăng Khoa",
-      printerId: "H660701",
-      printTime: "01/01/2025 -13:05",
-      quantity: "A0:1 A1:2 A3:4 A4:5",
-    },
-    {
-      studentId: "2211618",
-      fullName: "Nguyễn Đăng Khoa",
-      printerId: "H660701",
-      printTime: "01/01/2025 -13:05",
-      quantity: "A0:1 A1:2 A3:4 A4:5",
-    },
-    {
-      studentId: "2211618",
-      fullName: "Nguyễn Đăng Khoa",
-      printerId: "H660701",
-      printTime: "01/01/2025 -13:05",
-      quantity: "A0:1 A1:2 A3:4 A4:5",
-    },
-  ];
-
+  const [logs,setLogs] = useState([])
+  useEffect(()=>{
+    fetch("http://localhost:5050/api/logs/student",{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+    })
+    .then(res=>res.json())
+    .then(json=>{
+      const logList = json.logs
+      setLogs(logList)
+    })
+    .catch(err=>console.log(err))
+  },[])
   return (
     <div className="history">
       <h1>Lịch Sử In</h1>
@@ -41,19 +26,27 @@ const History = () => {
           <tr>
             <th>Mã Số SV</th>
             <th>Họ và Tên SV</th>
-            <th>Mã Số Máy In</th>
-            <th>Thời Gian In</th>
+            <th>Máy In</th>
+            <th>Tên File</th>
+            <th>Kích cỡ</th>
+            <th>Trang in</th>
+            <th>Số bản copy</th>
             <th>Số Lượng</th>
+            <th>Trạng thái</th>
           </tr>
         </thead>
         <tbody>
-          {printRecords.map((record, index) => (
+          {logs.map((log, index) => (
             <tr key={index}>
-              <td>{record.studentId}</td>
-              <td>{record.fullName}</td>
-              <td>{record.printerId}</td>
-              <td>{record.printTime}</td>
-              <td>{record.quantity}</td>
+              <td>{log.studentId}</td>
+              <td>{log.Student.name}</td>
+              <td>{log.Printer.brand} {log.Printer.model}</td>
+              <td>{log.fileName}</td>
+              <td>A{log.pageSize}</td>
+              <td>{log.pagePrinted}</td>
+              <td>{log.numCopy}</td>
+              <td>{log.totalPage}</td>
+              <td>{log.status}</td>
             </tr>
           ))}
         </tbody>
