@@ -15,6 +15,7 @@ import ManageStudent from "../pages/manageStudent/ManageStudent";
 import PrintRequire from "../pages/printRequire/PrintRequire";
 import AddPrinter from "../pages/addPrinter/AddPrinter";
 import AdminPrinterInfo from "../pages/adminPrinterInfo/AdminPrinterInfo";
+import LandingPage from "../pages/landPage/LandingPage"
 const routers = [
   {
     path: "/loginSV",
@@ -24,6 +25,11 @@ const routers = [
   {
     path: "/loginAdmin",
     component: LoginAdmin,
+    layout: null,
+  },
+  {
+    path: "/",
+    component: LandingPage,
     layout: null,
   },
 ];
