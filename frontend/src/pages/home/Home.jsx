@@ -1,10 +1,7 @@
 import "./Home.scss";
-import PrintIcon from "@mui/icons-material/Print";
-import CircleIcon from "@mui/icons-material/Circle";
-import { useNavigate } from "react-router-dom";
+import HomeContent from "./HomeContent";
 import { useEffect, useState } from "react";
 const Home = () => {
-  const navigate = useNavigate();
   const [student,setStudent] = useState({
     studentId: "",
     name: "",
@@ -52,47 +49,7 @@ const Home = () => {
           <span>{student.faculity}</span>
         </div>
       </div>
-
-      <div className="homePrinter">
-        <div className="homePrinterInfo">
-          <div className="homePrinterInfoLogo">
-            <PrintIcon style={{ fontSize: "50px" }} />
-            <span>Máy in</span>
-          </div>
-          <span>H6 - 607</span>
-        </div>
-
-        <hr />
-
-        <div className="homePrinterStatus">
-          <div className="homePrinterStatusIcon">
-            <h3>Máy in</h3>
-            <div
-              className="homePrinterStatusIconProfile"
-              onClick={() => navigate("/printerInfo")}
-            >
-              <PrintIcon />
-              <span>Canon M10</span>
-            </div>
-          </div>
-
-          <div className="homeStatus">
-            <h3>Trạng thái</h3>
-            <div className="homeStatusIcon">
-              <CircleIcon />
-              <span>1 tài liệu sẵn sàng</span>
-            </div>
-          </div>
-
-          <div className="homeStatus">
-            <h3>Tình trạng</h3>
-            <div className="homeStatusIcon">
-              <CircleIcon />
-              <span>Có thể hoạt động</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HomeContent/>
     </div>
   );
 };
