@@ -66,7 +66,7 @@ exports.getPrinterByAdminId = (req,res) =>{
 exports.createPrinter = (req,res) =>{
   if (printerValidation(req)){
     Printer.create({
-      adminId:req.body.id,
+      adminId:req.params.id,
       model:req.body.model,
       brand:req.body.brand,
       description:req.body.description,

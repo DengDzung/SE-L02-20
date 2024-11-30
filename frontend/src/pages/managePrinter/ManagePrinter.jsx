@@ -50,14 +50,6 @@ const ManagePrinter = () => {
   };
 
   const handlePrinterInfo = (id) => {
-    const printer = printers.find((p) => p.printerId === id);
-    if (printer) {
-      alert(
-        `Printer Info:\nBrand: ${printer.brand}\nModel: ${printer.model}\nLocation: ${printer.buildingName}-${printer.roomNumber}`
-      );
-    } else {
-      alert("Printer not found.");
-    }
     navigate(`/admin-printerInfo/${id}`);
   };
 
@@ -85,12 +77,12 @@ const ManagePrinter = () => {
             Return to Dashboard
           </button>
 
-          <button
+          {/* <button
             onClick={handleConfigureFileTypes}
             className="configure-file-types-btn"
           >
             Configure File Types
-          </button>
+          </button> */}
 
           <button onClick={handleAddPrinter} className="add-printer-btn">
             Add Printer
@@ -107,7 +99,7 @@ const ManagePrinter = () => {
               <th>Printer Brand</th>
               <th>Printer Model</th>
               <th>Location</th>
-              <th>File Types</th>
+              {/* <th>File Types</th> */}
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -122,7 +114,7 @@ const ManagePrinter = () => {
                   <td>
                     {printer.buildingName}-{printer.roomNumber}
                   </td>
-                  <td>PDF</td>
+                  {/* <td>PDF</td> */}
                   <td>{printer.enable ? "Enable" : "Disable"}</td>
                   <td>
                     <button

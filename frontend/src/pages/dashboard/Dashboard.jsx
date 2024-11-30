@@ -55,7 +55,7 @@ const Dashboard = () => {
           <h2>Phòng</h2>
           <p>{admin.roomNumber}</p>
         </div>
-        <div
+        {/* <div
           className="summary-item-button"
           onClick={() => navigate("/print-require")}
         >
@@ -65,21 +65,21 @@ const Dashboard = () => {
         <div className="summary-item">
           <h2>Số Lượng Đã In</h2>
           <p>500</p>
-        </div>
+        </div> */}
       </section>
 
       <section className="dashboard-actions">
-        <h2>Quick Actions</h2>
+        {/* <h2>Quick Actions</h2> */}
         <div className="actions-container">
-          <button onClick={() => navigate("/printing-logs")}>
+          {/* <button onClick={() => navigate("/printing-logs")}>
             View Printing Logs
-          </button>
-          <button onClick={() => navigate("/printer-management")}>
+          </button> */}
+          {/* <button onClick={() => navigate("/printer-management")}>
             Manage Printers
-          </button>
-          <button onClick={() => navigate("/configuration")}>
+          </button> */}
+          {/* <button onClick={() => navigate("/configuration")}>
             Students Configuration
-          </button>
+          </button> */}
         </div>
       </section>
 

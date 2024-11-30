@@ -34,9 +34,6 @@ exports.getAllLogStudent = (req,res)=>{
 
 exports.getAllLogAdmin = (req,res) => {
   Log.findAll({
-    where:{
-      status:"Wait"
-    },
     include:[
       {
         model:Student,

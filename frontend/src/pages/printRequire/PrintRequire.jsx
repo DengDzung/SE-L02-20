@@ -16,7 +16,7 @@ const PrintRequire = () => {
     .then(res=>res.json())
     .then(json=>{
       console.log(json)
-      const logList = json.logs
+      const logList = json.logs.filter(log => log.status == "Wait")
       setLogs(logList)
     })
     .catch(err=>console.log(err))

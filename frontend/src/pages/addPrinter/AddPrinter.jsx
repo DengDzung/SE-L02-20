@@ -5,11 +5,12 @@ import "./AddPrinter.scss";
 const AddPrinter = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    brand: "",
-    model: "",
-    location: "",
-    fileTypes: "", 
-    enable: true, // Default value
+    model:"",
+    brand:"",
+    description:"",
+    campus:"",
+    building:"",
+    room:0,
   });
 
   const handleChange = (e) => {
@@ -22,8 +23,18 @@ const AddPrinter = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Implement API call here to save the new printer
+    fetch("http://localhost:5050/api/printers",{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body:JSON.stringify(formData)
+    })
+    .then(()=>navigate("/printer-management"))
+    .catch(err=>{
+      console.log(err)
+    })
   };
 
   const handleCancel = () => {
@@ -46,7 +57,6 @@ const AddPrinter = () => {
             type="text"
             id="brand"
             name="brand"
-            value={formData.brand}
             onChange={handleChange}
             required
             placeholder="Nhập hãng của máy in..."
@@ -59,7 +69,6 @@ const AddPrinter = () => {
             type="text"
             id="model"
             name="model"
-            value={formData.model}
             onChange={handleChange}
             required
             placeholder="Nhập model của máy in..."
@@ -67,44 +76,53 @@ const AddPrinter = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="location">Vị trí máy in</label>
+          <label htmlFor="location">Mô tả máy in</label>
           <input
             type="text"
             id="location"
-            name="location"
-            value={formData.buildingName}
+            name="description"
             onChange={handleChange}
             required
-            placeholder="Nhập ví trị đặt máy in..."
+            placeholder="Nhập mô tả cho máy in..."
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="fileTypes">File Types</label>
+          <label htmlFor="location">Tên campus</label>
           <input
             type="text"
-            id="fileTypes"
-            name="fileTypes"
-            value={formData.fileTypes}
+            id="location"
+            name="campus"
             onChange={handleChange}
             required
-            placeholder="Nhập các loại file được in..."
+            placeholder="Nhập tên toà đặt máy in..."
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="enable">Status</label>
-          <select
-            id="enable"
-            name="enable"
-            value={formData.enable.toString()}
+          <label htmlFor="location">Tên toà</label>
+          <input
+            type="text"
+            id="location"
+            name="building"
             onChange={handleChange}
             required
-          >
-            <option value="true">Enable</option>
-            <option value="false">Disable</option>
-          </select>
+            placeholder="Nhập tên toà đặt máy in..."
+          />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="location">Số phòng</label>
+          <input
+            type="number"
+            id="location"
+            name="room"
+            onChange={handleChange}
+            required
+            placeholder="Nhập số phòng đặt máy in..."
+          />
+        </div>
+
 
         <button type="submit" className="submit-btn">
           Add Printer

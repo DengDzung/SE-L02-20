@@ -60,10 +60,9 @@ const Profile = () => {
         </table>
       </div>
 
-      <div className="table-container">
+      {/* <div className="table-container">
         <h2>
           <InfoIcon style={{ marginRight: "8px", fontSize: "30px" }} />{" "}
-          {/* Thêm biểu tượng chữ i */}
           Thông Tin Sử Dụng{" "}
         </h2>
         <table>
@@ -78,7 +77,7 @@ const Profile = () => {
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 };

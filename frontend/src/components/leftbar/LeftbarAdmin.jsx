@@ -31,10 +31,10 @@ const LeftbarAdmin = ({ isHidden }) => {
             <ManageSearchIcon />
             <span>Yêu cầu in</span>
           </button>
-          <button className="leftBarItem" onClick={() => navigate("/profile")}>
+          {/* <button className="leftBarItem" onClick={() => navigate("/profile")}>
             <AccountCircleIcon />
             <span>Trang cá nhân</span>
-          </button>
+          </button> */}
           <button className="leftBarItem" onClick={handleLogout}>
             <LogoutIcon />
             <span>Đăng xuất</span>
