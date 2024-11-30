@@ -80,7 +80,6 @@ const Dashboard = () => {
           <button onClick={() => navigate("/configuration")}>
             Students Configuration
           </button>
-          <button onClick={() => navigate("/reports")}>View Reports</button>
         </div>
       </section>
 

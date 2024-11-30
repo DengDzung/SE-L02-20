@@ -13,6 +13,8 @@ import PrintingLogs from "../pages/printingLogs/PrintingLogs";
 import ManagePrinter from "../pages/managePrinter/ManagePrinter";
 import ManageStudent from "../pages/manageStudent/ManageStudent";
 import PrintRequire from "../pages/printRequire/PrintRequire";
+import AddPrinter from "../pages/addPrinter/AddPrinter";
+import AdminPrinterInfo from "../pages/adminPrinterInfo/AdminPrinterInfo";
 const routers = [
   {
     path: "/loginSV",
@@ -56,7 +58,7 @@ const studentRouters = [
     component: Printing,
     layout: MainLayout,
   },
-]
+];
 
 const adminRouters = [
   {
@@ -84,5 +86,15 @@ const adminRouters = [
     component: PrintingLogs,
     layout: AdminLayout,
   },
-]
-export {routers , studentRouters, adminRouters };
+  {
+    path: "/addPrinter",
+    component: AddPrinter,
+    layout: AdminLayout,
+  },
+  {
+    path: "/admin-printerInfo/:id",
+    component: AdminPrinterInfo,
+    layout: AdminLayout,
+  },
+];
+export { routers, studentRouters, adminRouters };

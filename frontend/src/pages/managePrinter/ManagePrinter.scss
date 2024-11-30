@@ -18,63 +18,58 @@
     .actions {
       display: flex;
       gap: 10px;
-      .add-printer-btn {
+
+      .add-printer-btn,
+      .return-to-dashboard-btn,
+      .configure-file-types-btn {
         padding: 10px 20px;
-        border: none;
-        background-color: #0078d7;
-        color: white;
         font-size: 14px;
+        border: none;
+        border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.1s ease;
-        border-radius: 5px;
+
+        &:active {
+          transform: scale(0.95); /* Shrink button slightly on click */
+        }
+      }
+
+      .add-printer-btn {
+        background-color: #0078d7;
+        color: white;
 
         &:hover {
           background-color: #005fa3;
         }
 
         &:active {
-          transform: scale(0.95); /* Shrink button slightly on click */
-          background-color: #004a85; /* Even darker blue when clicked */
+          background-color: #004a85;
         }
       }
 
       .return-to-dashboard-btn {
-        padding: 10px 20px;
         background-color: #f44336; /* Red background */
         color: white;
-        border: none;
-        font-size: 14px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, transform 0.1s ease;
 
         &:hover {
-          background-color: #d32f2f; /* Darker red on hover */
+          background-color: #d32f2f;
         }
 
         &:active {
-          transform: scale(0.95); /* Shrink button slightly on click */
-          background-color: #b71c1c; /* Even darker red when clicked */
+          background-color: #b71c1c;
         }
       }
 
       .configure-file-types-btn {
-        padding: 10px 20px;
         background-color: #4caf50; /* Green background */
         color: white;
-        border: none;
-        font-size: 14px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, transform 0.1s ease;
 
         &:hover {
-          background-color: #388e3c; /* Darker green on hover */
+          background-color: #388e3c;
         }
 
         &:active {
-          transform: scale(0.95); /* Shrink button slightly on click */
-          background-color: #2e7d32; /* Even darker green when clicked */
+          background-color: #2e7d32;
         }
       }
     }
@@ -107,9 +102,9 @@
         background-color: #e9f1f9;
       }
 
-      .status-btn {
+      .status-btn,
+      .info-btn {
         padding: 5px 10px;
-        background-color: #ff6600; /* Orange background */
         color: white;
         border: none;
         border-radius: 5px;
@@ -117,13 +112,33 @@
         font-size: 12px;
         transition: background-color 0.3s ease, transform 0.1s ease;
 
+        &:active {
+          transform: scale(0.95); /* Shrink button slightly on click */
+        }
+      }
+
+      .status-btn {
+        background-color: #ff6600; /* Orange background */
+
         &:hover {
-          background-color: #cc5200; /* Darker orange on hover */
+          background-color: #cc5200;
         }
 
         &:active {
-          transform: scale(0.95); /* Shrink button slightly on click */
-          background-color: #b34700; /* Even darker orange when clicked */
+          background-color: #b34700;
+        }
+      }
+
+      .info-btn {
+        background-color: #007bff; /* Blue background */
+        margin-left: 5px;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+
+        &:active {
+          background-color: #004085;
         }
       }
     }
