@@ -14,7 +14,7 @@ exports.getAllLogStudent = (req,res)=>{
       },
       {
         model:Printer,
-        attributes: ['brand','model'],
+        attributes: ['brand','model','buildingName','roomNumber','enable'],
       }
     ]
   })
@@ -44,7 +44,7 @@ exports.getAllLogAdmin = (req,res) => {
       },
       {
         model:Printer,
-        attributes: ['brand','model','adminId'],
+        attributes: ['brand','model','adminId','buildingName','roomNumber','enable'],
         where:{
           adminId:req.params.id
         }
